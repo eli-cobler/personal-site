@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Your Name</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F5F6F8;
+    --ink: #101216;
+    --muted: #6B7280;
+    --hl: #E4E7EC;
+    --hover: #E4E7EC;
+    --font: "Manrope", "Helvetica Neue", Arial, sans-serif;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0C0D10; --ink: #F1F2F4; --muted: #8A909B; --hl: #1B1D23; --hover: #1B1D23;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0C0D10; --ink: #F1F2F4; --muted: #8A909B; --hl: #1B1D23; --hover: #1B1D23;
+  }
+
+  *, *::before, *::after { box-sizing: inherit; }
+  html { height: 100%; -webkit-text-size-adjust: 100%; }
+  body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  main { width: 100%; max-width: 60rem; margin: 0 auto; padding: 2rem 1.75rem; text-align: center; }
+
+  .photo {
+    width: clamp(6.5rem, 20vw, 9.5rem);
+    height: clamp(6.5rem, 20vw, 9.5rem);
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--hl);
+    color: var(--muted);
+    margin: 0 auto 2.25rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .photo svg { width: 70%; height: 70%; display: block; }
+
+  h1 {
+    font-weight: 300;
+    font-size: clamp(2.75rem, 9vw, 5.5rem);
+    line-height: 1;
+    letter-spacing: -0.045em;
+    margin: 0;
+  }
+
+  .rule { width: 3rem; height: 2px; background: var(--ink); margin: 2.5rem auto 1.5rem; }
+
+  nav { display: flex; justify-content: center; gap: 0.5rem; }
+  nav a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    color: var(--ink);
+    transition: background-color 0.2s ease;
+  }
+  nav a:hover { background: var(--hover); }
+  nav svg { width: 1.6rem; height: 1.6rem; display: block; }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+  .ph { background: var(--hl); border-radius: 3px; padding: 0 0.15em; }
+
+  .sr {
+    position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+  .word { white-space: nowrap; }
+  .c { visibility: hidden; position: relative; }
+  .c.on { visibility: visible; }
+  .c.cur::after {
+    content: '';
+    position: absolute;
+    bottom: 0.16em;
+    width: 0.5em;
+    height: 0.07em;
+    background: var(--ink);
+    visibility: visible;
+  }
+  .c.cur.end::after { left: 100%; margin-left: 0.04em; }
+  .c.cur.start::after { left: 0; }
+  #typed.idle .c.cur::after { animation: blink 1s step-end infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  @media (prefers-reduced-motion: reduce) { nav a { transition: none; } }
+</style>
+</head>
+<body>
+<main>
+  <div class="photo"><img src="Eli.jpg" alt="Photo of Eli Cobler"></div>
+  <h1><span class="sr">Eli Cobler</span><span id="typed" aria-hidden="true">Eli Cobler</span></h1>
+  <div class="rule"></div>
+  <nav aria-label="Contact and links">
+
+    <a href="mailto:ecobler11@gmail.com" aria-label="Email me" title="Email me">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="3" y="5" width="18" height="14" rx="2.5"/>
+        <path d="M3.5 7.5 12 13.5l8.5-6"/>
+      </svg>
+    </a>
+
+    <a href="https://www.linkedin.com/in/eli-cobler/" aria-label="LinkedIn profile" title="LinkedIn">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="2.5" y="2.5" width="19" height="19" rx="3.5" fill="currentColor"/>
+        <circle cx="7.6" cy="7.9" r="1.4" fill="var(--bg)"/>
+        <rect x="6.4" y="10.3" width="2.4" height="7" fill="var(--bg)"/>
+        <path d="M10.4 10.3h2.3v1c.4-.7 1.2-1.2 2.3-1.2 2 0 2.8 1.2 2.8 3.2v4h-2.4v-3.5c0-1-.3-1.6-1.2-1.6-.9 0-1.4.6-1.4 1.7v3.4h-2.4z" fill="var(--bg)"/>
+      </svg>
+    </a>
+
+    <a href="Resume.pdf" download aria-label="Download résumé" title="Download résumé">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M6 3h8l5 5v13H6z"/>
+        <path d="M14 3v5h5"/>
+        <path d="M9.5 13h6M9.5 16.5h6"/>
+      </svg>
+    </a>
+
+  </nav>
+</main>
+<script>
+(function () {
+  var el = document.getElementById('typed');
+  if (!el) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var text = el.textContent;
+  el.textContent = '';
+  var chars = [];
+  text.split(' ').forEach(function (word, i, all) {
+    var w = document.createElement('span');
+    w.className = 'word';
+    word.split('').forEach(function (ch) {
+      var c = document.createElement('span');
+      c.className = 'c';
+      c.textContent = ch;
+      w.appendChild(c);
+      chars.push(c);
+    });
+    el.appendChild(w);
+    if (i < all.length - 1) el.appendChild(document.createTextNode(' '));
+  });
+
+  var n = 0;
+
+  function render() {
+    chars.forEach(function (c, i) {
+      c.classList.toggle('on', i < n);
+      c.classList.remove('cur', 'end', 'start');
+    });
+    var target = n > 0 ? chars[n - 1] : chars[0];
+    target.classList.add('cur', n > 0 ? 'end' : 'start');
+  }
+
+  function idle(on) { el.classList.toggle('idle', on); }
+
+  function type() {
+    idle(false);
+    if (n < chars.length) {
+      n++;
+      render();
+      setTimeout(type, 70 + Math.random() * 60);
+    } else {
+      idle(true);
+      setTimeout(erase, 2200);
+    }
+  }
+
+  function erase() {
+    idle(false);
+    if (n > 0) {
+      n--;
+      render();
+      setTimeout(erase, 45);
+    } else {
+      idle(true);
+      setTimeout(type, 700);
+    }
+  }
+
+  render();
+  idle(true);
+  setTimeout(type, 500);
+})();
+</script>
+</body>
+</html>
