@@ -1,6 +1,24 @@
 services:
   site:
     build: .
-    ports:
-      - "8080:8080"
+    # No "ports:" mapping needed — only cloudflared talks to this container,
+    # over the internal Docker network below. Nothing is exposed on the host.
     restart: unless-stopped
+    networks:
+      - internal
+
+  # Connects out to Cloudflare and forwards traffic to the "site" service.
+  # Get TUNNEL_TOKEN from the Cloudflare dashboard: Zero Trust > Networks > Tunnels.
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    command: tunnel --protocol http2 run
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+    restart: unless-stopped
+    networks:
+      - internal
+    depends_on:
+      - site
+
+networks:
+  internal:
