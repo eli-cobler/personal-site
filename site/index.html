@@ -3,17 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Your Name</title>
+<title>Eli Cobler</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>😎</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #F5F6F8;
+    --bg: #EEF0F4;
     --ink: #101216;
-    --muted: #6B7280;
-    --hl: #E4E7EC;
-    --hover: #E4E7EC;
+    --muted: #5B6472;
+    --hl: rgba(16, 18, 22, 0.08);
+    --hover: rgba(16, 18, 22, 0.08);
+    --glass-bg: rgba(255, 255, 255, 0.38);
+    --glass-border: rgba(255, 255, 255, 0.55);
+    --glass-shadow: rgba(30, 40, 60, 0.16);
+    --glow-a: #C9B6FF;
+    --glow-b: #AFE0F0;
+    --glow-c: #FFD3C2;
     --font: "Manrope", "Helvetica Neue", Arial, sans-serif;
     box-sizing: border-box;
     padding-top: env(safe-area-inset-top, 0px);
@@ -21,11 +28,31 @@
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --bg: #0C0D10; --ink: #F1F2F4; --muted: #8A909B; --hl: #1B1D23; --hover: #1B1D23;
+      --bg: #101114;
+      --ink: #F1F2F4;
+      --muted: #9AA1AC;
+      --hl: rgba(241, 242, 244, 0.1);
+      --hover: rgba(241, 242, 244, 0.1);
+      --glass-bg: rgba(255, 255, 255, 0.07);
+      --glass-border: rgba(255, 255, 255, 0.16);
+      --glass-shadow: rgba(0, 0, 0, 0.45);
+      --glow-a: #5B4A99;
+      --glow-b: #2E5A66;
+      --glow-c: #7A4A3C;
     }
   }
   :root[data-theme="dark"] {
-    --bg: #0C0D10; --ink: #F1F2F4; --muted: #8A909B; --hl: #1B1D23; --hover: #1B1D23;
+    --bg: #101114;
+    --ink: #F1F2F4;
+    --muted: #9AA1AC;
+    --hl: rgba(241, 242, 244, 0.1);
+    --hover: rgba(241, 242, 244, 0.1);
+    --glass-bg: rgba(255, 255, 255, 0.07);
+    --glass-border: rgba(255, 255, 255, 0.16);
+    --glass-shadow: rgba(0, 0, 0, 0.45);
+    --glow-a: #5B4A99;
+    --glow-b: #2E5A66;
+    --glow-c: #7A4A3C;
   }
 
   *, *::before, *::after { box-sizing: inherit; }
@@ -40,9 +67,71 @@
     font-family: var(--font);
     font-weight: 500;
     line-height: 1.5;
+    position: relative;
+    overflow-x: hidden;
   }
 
-  main { width: 100%; max-width: 60rem; margin: 0 auto; padding: 2rem 1.75rem; text-align: center; }
+  .glow {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .glow span {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.55;
+  }
+  .glow span:nth-child(1) {
+    width: 26rem; height: 26rem;
+    background: var(--glow-a);
+    top: -8rem; left: -6rem;
+  }
+  .glow span:nth-child(2) {
+    width: 22rem; height: 22rem;
+    background: var(--glow-b);
+    bottom: -9rem; right: -5rem;
+  }
+  .glow span:nth-child(3) {
+    width: 18rem; height: 18rem;
+    background: var(--glow-c);
+    top: 45%; left: 60%;
+    transform: translate(-50%, -50%);
+    opacity: 0.35;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .glow span { opacity: 0.28; }
+    :root:not([data-theme="light"]) .glow span:nth-child(3) { opacity: 0.18; }
+  }
+  :root[data-theme="dark"] .glow span { opacity: 0.28; }
+  :root[data-theme="dark"] .glow span:nth-child(3) { opacity: 0.18; }
+
+  main { width: 100%; max-width: 60rem; margin: 0 auto; padding: 2rem 1.75rem; text-align: center; position: relative; z-index: 1; }
+
+  .card {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    padding: clamp(2.25rem, 6vw, 3.5rem) clamp(2rem, 8vw, 4.5rem);
+    border-radius: 2rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    box-shadow:
+      0 1px 0 0 rgba(255, 255, 255, 0.5) inset,
+      0 8px 32px var(--glass-shadow);
+    backdrop-filter: blur(22px) saturate(160%);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .card {
+      box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.06) inset, 0 8px 32px var(--glass-shadow);
+    }
+  }
+  :root[data-theme="dark"] .card {
+    box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.06) inset, 0 8px 32px var(--glass-shadow);
+  }
 
   .photo {
     width: clamp(6.5rem, 20vw, 9.5rem);
@@ -55,6 +144,7 @@
     display: flex;
     align-items: flex-end;
     justify-content: center;
+    border: 1px solid var(--glass-border);
   }
   .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .photo svg { width: 70%; height: 70%; display: block; }
@@ -80,7 +170,16 @@
     color: var(--ink);
     transition: background-color 0.2s ease;
   }
-  nav a:hover { background: var(--hover); }
+  nav a {
+    -webkit-backdrop-filter: blur(0px);
+    backdrop-filter: blur(0px);
+    transition: background-color 0.2s ease, backdrop-filter 0.2s ease;
+  }
+  nav a:hover {
+    background: var(--hover);
+    backdrop-filter: blur(12px) saturate(160%);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
+  }
   nav svg { width: 1.6rem; height: 1.6rem; display: block; }
   :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 
@@ -111,8 +210,10 @@
 </style>
 </head>
 <body>
+<div class="glow" aria-hidden="true"><span></span><span></span><span></span></div>
 <main>
-  <div class="photo"><img src="Eli.jpg" alt="Photo of Eli Cobler"></div>
+  <div class="card">
+  <div class="photo"><img src="Eli.jpg" alt="Photo of Eli"></div>
   <h1><span class="sr">Eli Cobler</span><span id="typed" aria-hidden="true">Eli Cobler</span></h1>
   <div class="rule"></div>
   <nav aria-label="Contact and links">
@@ -124,7 +225,7 @@
       </svg>
     </a>
 
-    <a href="https://www.linkedin.com/in/eli-cobler/" aria-label="LinkedIn profile" title="LinkedIn">
+    <a href="https://www.linkedin.com/in/eli-cobler" aria-label="LinkedIn profile" title="LinkedIn">
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <rect x="2.5" y="2.5" width="19" height="19" rx="3.5" fill="currentColor"/>
         <circle cx="7.6" cy="7.9" r="1.4" fill="var(--bg)"/>
@@ -133,7 +234,13 @@
       </svg>
     </a>
 
-    <a href="Resume.pdf" download aria-label="Download résumé" title="Download résumé">
+    <a href="https://github.com/eli-cobler" aria-label="GitHub profile" title="GitHub">
+      <svg viewBox="-2 -2 20 20" aria-hidden="true">
+        <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+      </svg>
+    </a>
+
+    <a href="/resume" aria-label="View résumé" title="Résumé">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <path d="M6 3h8l5 5v13H6z"/>
         <path d="M14 3v5h5"/>
@@ -142,6 +249,7 @@
     </a>
 
   </nav>
+  </div>
 </main>
 <script>
 (function () {
